@@ -11,12 +11,18 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * Клас для отправки сообщений на сервер
+ */
 public class WebUtils {
-    public String sendGet(String url,String par){
-        return new String();
-    }
 
-    public JSONObject sendPost(String url, JSONObject jsonObject){
+    /**
+     * Метоод формирует POST запрос на указанный url с JSON объектом
+     * @param url - адрес ресурса
+     * @param jsonObject - JSON объект для отправки
+     * @return ответный JSON, NULL-если ответа не было или возникла ошибка
+     */
+    public static JSONObject sendPost(String url, JSONObject jsonObject){
         HttpClient httpClient = HttpClientBuilder.create().build();
         try {
             StringEntity params = new StringEntity(jsonObject.toString());
@@ -24,12 +30,11 @@ public class WebUtils {
             request.setEntity(params);
             HttpResponse response = httpClient.execute(request);
             String jsonString = EntityUtils.toString(response.getEntity());
-            return new JSONObject(jsonString);
+            if(!jsonString.isEmpty())
+                return new JSONObject(jsonString);
         } catch (Exception e) {
-        } finally {
-            //httpClient.??
+            System.out.println(e.getMessage());
         }
-
-        return null;//??
+        return null;
     }
 }

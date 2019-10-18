@@ -3,6 +3,9 @@ package com.wetcoding.farmclient;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
+/**
+ * Класс для формирования модели таблицы
+ */
 public class TaskTableModel extends AbstractTableModel {
     List<Task> taskList;
 
